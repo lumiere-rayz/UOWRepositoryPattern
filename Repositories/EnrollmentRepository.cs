@@ -35,7 +35,7 @@ namespace UOW_101.Repositories
                 int countresult = await dbSet.Where(x => x.StudentId == entity.StudentId)
                                                     .CountAsync();
 
-                var existingUser = await dbSet.Where(x => x.Id == entity.Id)
+                var existingUser = await dbSet.Where(x => x.CourseId == entity.CourseId && x.StudentId == entity.StudentId)
                                                         .FirstOrDefaultAsync();
 
                 if (existingUser == null && countresult < 3)
@@ -49,7 +49,6 @@ namespace UOW_101.Repositories
                 else
                 {
                     return false;
-
                 }
 
             }
