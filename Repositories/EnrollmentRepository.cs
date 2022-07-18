@@ -42,20 +42,23 @@ namespace UOW_101.Repositories
                 {
                     return await Add(entity);
 
-                    existingUser.StudentId = entity.StudentId;
-                    existingUser.CourseId = entity.CourseId;
-                    return true;
+                    //existingUser.StudentId = entity.StudentId;
+                    //existingUser.CourseId = entity.CourseId;
+                    //return true;
                 }
                 else
                 {
-                    return false;
+                    //return false;
+                    throw new Exception("not allowed");
                 }
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "{Repo} Upsert function error", typeof(EnrollmentRepository));
-                return false;
+                throw new Exception("not allowed(cant enroll for a course twice and more than three course)");
+
+                //_logger.LogError(ex, "{Repo} Upsert function error", typeof(EnrollmentRepository));
+                //return false;
             }
         }
 
@@ -79,15 +82,17 @@ namespace UOW_101.Repositories
                 }
                 else
                 {
-                    return false;
+                    throw new Exception("not allowed");
+                    //return false;
 
                 }
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "{Repo} Upsert function error", typeof(EnrollmentRepository));
-                return false;
+                throw new Exception("not allowed");
+                //_logger.LogError(ex, "{Repo} Upsert function error", typeof(EnrollmentRepository));
+                //return false;
             }
         }
         public override async Task<bool> Delete(Guid id)
